@@ -1,0 +1,17 @@
+Workspace/
+Mod/CREDITS.txt
+Mod/LICENSE-Paulscode\ IBXM\ Library.txt
+Mod/LICENSE-Paulscode\ SoundSystem\ CodecIBXM.txt
+Mod/License.txt
+Mod/README.txt
+Mod/bin/
+Mod/build/
+Mod/build.gradle
+Mod/changelog.txt
+Mod/gradle
+Mod/gradle.properties
+Mod/gradlew
+Mod/gradlew.bat
+Mod/run/
+Mod/runClient.launch
+Mod/runServer.launch

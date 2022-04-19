@@ -1,0 +1,16 @@
+[
+{
+  "modid": "skygen",
+  "name": "Skygen",
+  "description": "A skyblock world generator and spawning/command framework with some specific compatibilities",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["jkstenzel95"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
