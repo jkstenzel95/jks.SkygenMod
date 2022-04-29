@@ -4,7 +4,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.jks.skygenmod.proxy.CommonProxy;
 import com.jks.skygenmod.util.Reference;
-import com.jks.skygenmod.util.RegistryHandler;
+import com.jks.skygenmod.util.handlers.RegistryHandler;
 import com.jks.skygenmod.world.gen.WorldGenHandler;
 
 import net.minecraftforge.common.MinecraftForge;

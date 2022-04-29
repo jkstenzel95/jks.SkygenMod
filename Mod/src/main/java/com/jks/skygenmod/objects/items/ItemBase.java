@@ -2,8 +2,8 @@ package com.jks.skygenmod.objects.items;
 
 import com.jks.skygenmod.Main;
 import com.jks.skygenmod.proxy.ClientProxy;
-import com.jks.skygenmod.util.IHasModel;
 import com.jks.skygenmod.util.init.ItemInit;
+import com.jks.skygenmod.util.interfaces.IHasModel;
 
 import net.minecraft.item.Item;
 
@@ -20,5 +20,4 @@ public class ItemBase extends Item implements IHasModel{
 	public void registerModels() {
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
 	}
-
 }
