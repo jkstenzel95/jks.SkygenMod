@@ -5,9 +5,8 @@ import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.jks.skygenmod.Main;
+import com.jks.skygenmod.SkygenMod;
 import com.jks.skygenmod.util.Reference;
-import com.jks.skygenmod.util.interfaces.IStructure;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.server.MinecraftServer;
@@ -24,14 +23,9 @@ public abstract class StructureBase implements IStructure {
 	
 	public boolean generate(World world, BlockPos placementOrigin) {
 		ChunkPos chunkPos = world.getChunkFromBlockCoords(new BlockPos(placementOrigin.getX(), placementOrigin.getY(), placementOrigin.getZ())).getPos(); 
-		if (world.provider.getDimension() == 0
-				&& structureSitsInChunk(world, placementOrigin, getName())) {
-			placeStructure(world, placementOrigin, getName());
-			Main.getLogger().info("SKYBLOCK PLACED FOR POS {} {}", placementOrigin.getX(), placementOrigin.getZ());
-			return true;
-		}
-		
-		return false;
+		placeStructure(world, placementOrigin, getName());
+		SkygenMod.getLogger().info("{} PLACED FOR POS {} {}", getName(), placementOrigin.getX(), placementOrigin.getZ());
+		return true;
 	}
 	
 	public abstract String getName();

@@ -12,6 +12,7 @@ Mod/gradle
 Mod/gradle.properties
 Mod/gradlew
 Mod/gradlew.bat
+Mod/mod-references/
 Mod/run/
 Mod/runClient.launch
 Mod/runServer.launch

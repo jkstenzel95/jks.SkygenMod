@@ -3,8 +3,9 @@ package com.jks.skygenmod.world.gen;
 import java.util.List;
 import java.util.Random;
 
-import com.jks.skygenmod.Main;
-import com.jks.skygenmod.util.interfaces.IStructure;
+import com.jks.skygenmod.SkygenMod;
+import com.jks.skygenmod.util.helpers.Utility;
+import com.jks.skygenmod.world.gen.structures.IStructure;
 import com.jks.skygenmod.world.gen.structures.WorldGenSkyblockStructure;
 import com.jks.skygenmod.world.gen.structures.WorldGenSkyspawnStructure;
 
@@ -65,7 +66,11 @@ public class SkygenChunkGenerator implements IChunkGenerator {
 
 	@Override
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
-		boolean res = this.worldGenSkyspawnStructure.generate(this.world, this.world.getSpawnPoint());
+		boolean res = false;
+		if (Utility.isPositionWithinChunk(world.getSpawnPoint().getX(), world.getSpawnPoint().getZ(), chunkIn.x, chunkIn.z)) {
+			res = this.worldGenSkyspawnStructure.generate(this.world, this.world.getSpawnPoint());
+		}
+		
 		return res;
 	}
 

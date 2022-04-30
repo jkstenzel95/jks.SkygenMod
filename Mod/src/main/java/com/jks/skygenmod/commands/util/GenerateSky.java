@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.Triple;
 
 import com.google.common.collect.Lists;
-import com.jks.skygenmod.Main;
+import com.jks.skygenmod.SkygenMod;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -37,7 +37,7 @@ public class GenerateSky {
 			}
 		}
 		Instant ends = Instant.now();
-		Main.getLogger().info("{} elapsed to delete {} x {} blocks)", Duration.between(starts, ends).toString(), 2*distance + 1, 2*distance + 1);
+		SkygenMod.getLogger().info("{} elapsed to delete {} x {} blocks)", Duration.between(starts, ends).toString(), 2*distance + 1, 2*distance + 1);
 	}
 	
 	public static void strategy2(World world, int distance) {
@@ -68,7 +68,7 @@ public class GenerateSky {
 				}
 			}
 			
-			Main.getLogger().info("{} / {} airified in world, total", totalAir, totalBlocks);
+			SkygenMod.getLogger().info("{} / {} airified in world, total", totalAir, totalBlocks);
 		}
 	}
 	
@@ -118,10 +118,10 @@ public class GenerateSky {
 			}
 		}
 		
-		Main.getLogger().info("CHUNK DELETED x:[{},{}), z:[{},{}). STATS:", chunkStartX, chunkEndX, chunkStartZ, chunkEndZ);
-		Main.getLogger().info("distance: {}", distance);
-		Main.getLogger().info("swx:{}, ewx:{}, swz:{}, ewz:{}", startWipeX, endWipeX, startWipeZ, endWipeZ);
-		Main.getLogger().info("pre: {} / {} airified storage, pre", storageCounter, blockCounter);
+		SkygenMod.getLogger().info("CHUNK DELETED x:[{},{}), z:[{},{}). STATS:", chunkStartX, chunkEndX, chunkStartZ, chunkEndZ);
+		SkygenMod.getLogger().info("distance: {}", distance);
+		SkygenMod.getLogger().info("swx:{}, ewx:{}, swz:{}, ewz:{}", startWipeX, endWipeX, startWipeZ, endWipeZ);
+		SkygenMod.getLogger().info("pre: {} / {} airified storage, pre", storageCounter, blockCounter);
 		
 	    chunk.setModified(true); // this is important as it marks it to be saved
 	    
@@ -135,7 +135,7 @@ public class GenerateSky {
 			}
 		}
 		
-		Main.getLogger().info("pre: {} / {} airified storage, post", storageCounter, blockCounter);
+		SkygenMod.getLogger().info("pre: {} / {} airified storage, post", storageCounter, blockCounter);
 	}
 	
 	// Provided an x or z coordinate, returns the coordinate of the start of the chunk

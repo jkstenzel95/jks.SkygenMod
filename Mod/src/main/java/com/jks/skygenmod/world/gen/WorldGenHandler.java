@@ -9,7 +9,7 @@ import java.util.HashSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.jks.skygenmod.Main;
+import com.jks.skygenmod.SkygenMod;
 import com.jks.skygenmod.util.Reference;
 
 import net.minecraft.init.Blocks;
@@ -128,6 +128,6 @@ public class WorldGenHandler {
 		}
 		
 		Instant ends = Instant.now();
-		Main.getLogger().info("{} elapsed, {} cleared for {},{}", Duration.between(starts, ends).toString(), cleared, chunk.x, chunk.z);
+		SkygenMod.getLogger().info("{} elapsed, {} cleared for {},{}", Duration.between(starts, ends).toString(), cleared, chunk.x, chunk.z);
 	}
 }

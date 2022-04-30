@@ -6,9 +6,8 @@ import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.jks.skygenmod.Main;
+import com.jks.skygenmod.SkygenMod;
 import com.jks.skygenmod.util.Reference;
-import com.jks.skygenmod.util.interfaces.IStructure;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.server.MinecraftServer;

@@ -3,7 +3,7 @@ package com.jks.skygenmod.world.gen;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.logging.log4j.Logger;
 
-import com.jks.skygenmod.Main;
+import com.jks.skygenmod.SkygenMod;
 
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -22,8 +22,8 @@ public class WorldTypeSkygen extends WorldType {
 	@Override
     public IChunkGenerator getChunkGenerator(World world, String generatorOptions)
     {
-		Main.getLogger().info("Holy heck the options");
-		Main.getLogger().info(generatorOptions);
+		SkygenMod.getLogger().info("Holy heck the options");
+		SkygenMod.getLogger().info(generatorOptions);
 		return new SkygenChunkGenerator(
 				new ChunkGeneratorOverworld(
 						world, 

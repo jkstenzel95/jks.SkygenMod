@@ -1,4 +1,4 @@
-package com.jks.skygenmod.util.interfaces;
+package com.jks.skygenmod.world.gen.structures;
 
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;

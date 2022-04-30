@@ -2,7 +2,7 @@ package com.jks.skygenmod;
 
 import org.apache.logging.log4j.Logger;
 
-import com.jks.skygenmod.proxy.CommonProxy;
+import com.jks.skygenmod.proxy.IProxy;
 import com.jks.skygenmod.util.Reference;
 import com.jks.skygenmod.util.handlers.RegistryHandler;
 import com.jks.skygenmod.world.gen.WorldGenHandler;
@@ -18,14 +18,14 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION)
-public class Main {
+public class SkygenMod {
 	@Instance
-	public static Main instance;
+	public static SkygenMod instance;
 	
 	private static Logger logger;
 	   
-    @SidedProxy(clientSide = Reference.CLIENT, serverSide = Reference.COMMON)
-    public static CommonProxy proxy;
+    @SidedProxy(clientSide = Reference.CLIENT, serverSide = Reference.SERVER)
+    public static IProxy proxy;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)

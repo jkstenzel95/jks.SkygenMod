@@ -3,7 +3,7 @@ package com.jks.skygenmod.world.gen;
 import java.util.Random;
 
 import com.jks.skygenmod.util.Reference;
-import com.jks.skygenmod.util.interfaces.IStructure;
+import com.jks.skygenmod.world.gen.structures.IStructure;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.server.MinecraftServer;

@@ -1,0 +1,7 @@
+{
+  "sound_skyfling": {
+    "category": "ambient",
+    "subtitle": "skygenmod.subtitle.sound_skyfling",
+    "sounds": [ "skygenmod:sound_skyfling" ]
+  }
+}
