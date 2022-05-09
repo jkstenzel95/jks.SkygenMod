@@ -1,36 +1,51 @@
 package com.jks.skygenmod.world.gen;
 
-import org.apache.commons.lang3.NotImplementedException;
-import org.apache.logging.log4j.Logger;
-
 import com.jks.skygenmod.SkygenMod;
+import com.jks.skygenmod.util.Reference;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeProvider;
-import net.minecraft.world.gen.ChunkGeneratorOverworld;
-import net.minecraft.world.gen.ChunkGeneratorSettings;
 import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.layer.GenLayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldTypeSkygen extends WorldType {
+	private static WorldType innerWorldType;
+	
 	public WorldTypeSkygen()
 	{
-		super("Skygen");
+		super(Reference.SKYGEN_WORLD_NAME);
+		SkygenMod.baseWorldTypeProxy.initWorldType(this);
+		innerWorldType = SkygenMod.baseWorldTypeProxy.getInnerWorldType();
+	}
+	
+	@Override
+	public BiomeProvider getBiomeProvider(World world) {
+		return SkygenMod.baseWorldTypeProxy.getBaseBiomeProvider(innerWorldType, world);
+	}
+	
+	@Override
+	public boolean isCustomizable() {
+		return SkygenMod.baseWorldTypeProxy.isCustomizable(this);
 	}
 	
 	@Override
     public IChunkGenerator getChunkGenerator(World world, String generatorOptions)
     {
-		SkygenMod.getLogger().info("Holy heck the options");
 		SkygenMod.getLogger().info(generatorOptions);
 		return new SkygenChunkGenerator(
-				new ChunkGeneratorOverworld(
-						world, 
-						world.getSeed(), 
-						false, 
-						generatorOptions),
+				SkygenMod.baseChunkGeneratorProxy.getBaseChunkGenerator(world, generatorOptions),
 				world,
 				world.getWorldInfo().isMapFeaturesEnabled());
     }
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onCustomizeButton(Minecraft mc, GuiCreateWorld guiCreateWorld) {
+		// TODO Auto-generated method stub
+		SkygenMod.baseWorldTypeProxy.onCustomizeButton(this, mc, guiCreateWorld);
+	}
 }

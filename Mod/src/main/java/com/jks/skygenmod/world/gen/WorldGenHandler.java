@@ -11,9 +11,11 @@ import org.apache.logging.log4j.Logger;
 
 import com.jks.skygenmod.SkygenMod;
 import com.jks.skygenmod.util.Reference;
+import com.jks.skygenmod.world.gen.structures.WorldGenSkyspawnStructure;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
@@ -25,12 +27,13 @@ import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.world.BlockEvent.CreateFluidSourceEvent;
 import net.minecraftforge.event.world.BlockEvent.FluidPlaceBlockEvent;
+import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-// @EventBusSubscriber
+@EventBusSubscriber
 public class WorldGenHandler {
 	// @SubscribeEvent(priority=EventPriority.LOWEST, receiveCanceled=true)
 	public static void onPopulate(PopulateChunkEvent.Populate event)
@@ -48,27 +51,29 @@ public class WorldGenHandler {
 		}
 	}
 	
-	// @SubscribeEvent(priority=EventPriority.LOWEST, receiveCanceled=true)
+	public static void onLoad(ChunkEvent.Load event) {
+		
+	}
+	
+	//@SubscribeEvent(priority=EventPriority.LOWEST, receiveCanceled=true)
 	public static void onEvent(PopulateChunkEvent.Post event)
 	{
 		Logger logger = LogManager.getLogger(Reference.MOD_ID);
-		logger.info("<< JKS SKYGEN >> PopulateChunk rewrite");
-	    
-		clearChunkSetArrayMethod(event.getWorld(), event.getWorld().getChunkFromChunkCoords(event.getChunkX(), event.getChunkZ()));
+		//logger.info("<< JKS SKYGEN >> PopulateChunk rewrite");
+	    if (event.getWorld().getWorldType().getName() == Reference.SKYGEN_WORLD_NAME) {
+	    	clearChunkSetArrayMethod(event.getWorld(), event.getWorld().getChunkFromChunkCoords(event.getChunkX(), event.getChunkZ()));
+	    	//SkygenMod.getLogger().info("PopulateChunkPost called: {}, {}", event.getChunkX(), event.getChunkZ());
+	    	if (WorldGenSkyspawnStructure.instance.structureSitsInChunk(event.getWorld(), event.getWorld().getSpawnPoint(), WorldGenSkyspawnStructure.instance.getName(), new ChunkPos(event.getChunkX(), event.getChunkZ()))) {
+				WorldGenSkyspawnStructure.instance.generate(event.getWorld(), event.getWorld().getSpawnPoint());
+			}
+	    }
 	}
 	
-	// @SubscribeEvent(priority=EventPriority.LOWEST, receiveCanceled=true)
+	@SubscribeEvent(priority=EventPriority.LOWEST, receiveCanceled=true)
 	public static void onDecorateBiome(DecorateBiomeEvent.Decorate event)
 	{
-		Logger logger = LogManager.getLogger(Reference.MOD_ID);
-		logger.info("<< JKS >> onDecorateBiome: {}", event.getType().name());
-		if (!event.getWorld().isRemote)
+		if (event.getWorld().getWorldType().getName() == Reference.SKYGEN_WORLD_NAME && !event.getWorld().isRemote)
 		{
-			/*
-			 * clearChunkSetArrayMethod( event.getWorld(),
-			 * event.getWorld().getChunkFromChunkCoords(event.getChunkPos().getXStart(),
-			 * event.getChunkPos().getZStart()) );
-			 */
 			event.setResult(Result.DENY);
 		}
 	}

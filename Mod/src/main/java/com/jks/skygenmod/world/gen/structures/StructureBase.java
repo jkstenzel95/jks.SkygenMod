@@ -19,8 +19,6 @@ import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
 public abstract class StructureBase implements IStructure {
-	private static Template structureTemplate = null;
-	
 	public boolean generate(World world, BlockPos placementOrigin) {
 		ChunkPos chunkPos = world.getChunkFromBlockCoords(new BlockPos(placementOrigin.getX(), placementOrigin.getY(), placementOrigin.getZ())).getPos(); 
 		placeStructure(world, placementOrigin, getName());
@@ -46,20 +44,15 @@ public abstract class StructureBase implements IStructure {
 		
 		if (template != null) {
 			IBlockState state = world.getBlockState(pos);
-			world.notifyBlockUpdate(pos, state, state, 3);
 			template.addBlocksToWorldChunk(world, pos, settings);
 		}
 	}
 	
 	private Template getTemplate(World world, String structureName) {
-		if (this.structureTemplate == null) {
-			MinecraftServer mcServer = world.getMinecraftServer();
-			TemplateManager manager = worldServer.getStructureTemplateManager();
-			ResourceLocation location = new ResourceLocation(Reference.MOD_ID, structureName);
-			structureTemplate = manager.get(mcServer, location);
-		}
-		
-		return structureTemplate;
+		MinecraftServer mcServer = world.getMinecraftServer();
+		TemplateManager manager = worldServer.getStructureTemplateManager();
+		ResourceLocation location = new ResourceLocation(Reference.MOD_ID, structureName);
+		return manager.get(mcServer, location);
 	}
 	
 	public Set<Pair<Integer,Integer>> getChunksForStructure(World world, BlockPos placementOrigin, String structureName) {
@@ -88,8 +81,7 @@ public abstract class StructureBase implements IStructure {
 		return contained;
 	}
 	
-	public boolean structureSitsInChunk(World world, BlockPos placementOrigin, String structureName) {
-		ChunkPos chunkPos = world.getChunkFromBlockCoords(new BlockPos(placementOrigin.getX(), placementOrigin.getY(), placementOrigin.getZ())).getPos();
+	public boolean structureSitsInChunk(World world, BlockPos placementOrigin, String structureName, ChunkPos chunkPos) {
 		return getChunksForStructure(world, placementOrigin, structureName).contains(Pair.of(chunkPos.x, chunkPos.z));
 	}
 }

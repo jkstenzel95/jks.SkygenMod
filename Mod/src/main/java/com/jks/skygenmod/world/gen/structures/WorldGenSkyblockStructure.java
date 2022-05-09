@@ -27,6 +27,8 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGenSkyblockStructure extends StructureBase {
+	public static WorldGenSkyblockStructure instance = new WorldGenSkyblockStructure();
+	
 	@Override
 	public int getOffsetX() {
 		return -2;
@@ -39,7 +41,7 @@ public class WorldGenSkyblockStructure extends StructureBase {
 
 	@Override
 	public int getOffsetZ() {
-		return -2;
+		return -5;
 	}
 
 	@Override
